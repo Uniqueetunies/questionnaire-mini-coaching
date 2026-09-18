@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini-coaching offert | Unique &amp; Unies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bordeaux:#6E2438;
+    --bordeaux-deep:#4E1928;
+    --lilas:#B79ACB;
+    --lilas-pale:#EDE3F1;
+    --cream:#FBF6F3;
+    --ink:#3A2530;
+    --ink-soft:#7A6470;
+    --line:#E4D5DE;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', -apple-system, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:56px 24px 80px;}
+
+  .mark{
+    width:46px;height:46px;margin:0 auto 28px;display:block;
+  }
+
+  .eyebrow{
+    text-align:center;
+    color:var(--bordeaux);
+    font-size:14px;
+    letter-spacing:0.02em;
+    margin:0 0 10px;
+    font-weight:500;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(30px,5.5vw,42px);
+    line-height:1.15;
+    text-align:center;
+    margin:0 0 20px;
+    color:var(--bordeaux-deep);
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--bordeaux);
+  }
+
+  .intro{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:16.5px;
+    max-width:480px;
+    margin:0 auto 8px;
+  }
+
+  .facts{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    margin:32px 0 44px;
+    padding:20px 10px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .fact{text-align:center;min-width:90px;}
+  .fact strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    color:var(--bordeaux);
+    font-weight:600;
+  }
+  .fact span{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  form{margin-top:8px;}
+
+  .field{margin-bottom:26px;}
+  .field label{
+    display:block;
+    font-weight:600;
+    font-size:15px;
+    margin-bottom:8px;
+    color:var(--bordeaux-deep);
+  }
+  .field .hint{
+    display:block;
+    font-weight:400;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:3px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select{
+    width:100%;
+    font-family:inherit;
+    font-size:15.5px;
+    color:var(--ink);
+    padding:12px 14px;
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    transition:border-color .15s ease;
+  }
+  input:focus, textarea:focus, select:focus{
+    outline:none;
+    border-color:var(--lilas);
+    box-shadow:0 0 0 3px var(--lilas-pale);
+  }
+  textarea{resize:vertical;min-height:78px;}
+
+  .row2{display:flex;gap:16px;}
+  .row2 .field{flex:1;}
+
+  .scale{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  .scale label{
+    flex:1;
+    min-width:30px;
+    text-align:center;
+    font-weight:500;
+    font-size:14px;
+    padding:10px 0;
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    background:#fff;
+    transition:all .15s ease;
+  }
+  .scale input{position:absolute;opacity:0;pointer-events:none;}
+  .scale label:has(input:checked){
+    background:var(--bordeaux);
+    border-color:var(--bordeaux);
+    color:#fff;
+  }
+  .scale-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+
+  fieldset{border:none;padding:0;margin:0;}
+
+  .divider{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:40px 0 30px;
+  }
+  .divider::before, .divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .divider span{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--bordeaux);
+    font-size:15px;
+    white-space:nowrap;
+  }
+
+  .referral-box{
+    background:var(--lilas-pale);
+    border-radius:12px;
+    padding:22px 22px 6px;
+    margin-bottom:32px;
+  }
+  .referral-box p.lead{
+    margin:0 0 16px;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+
+  .consent{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    margin-bottom:18px;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .consent input{
+    margin-top:3px;
+    width:17px;height:17px;
+    accent-color:var(--bordeaux);
+    flex-shrink:0;
+  }
+  .consent label{cursor:pointer;}
+  .consent .req{color:var(--bordeaux);font-weight:600;}
+
+  button.submit{
+    display:block;
+    width:100%;
+    background:var(--bordeaux);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:16px;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    cursor:pointer;
+    margin-top:8px;
+    transition:background .15s ease;
+  }
+  button.submit:hover{background:var(--bordeaux-deep);}
+
+  .footnote{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:16px;
+  }
+
+  .confirm{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+  }
+  .confirm.show{display:block;}
+  .confirm h2{
+    font-family:'Fraunces', serif;
+    color:var(--bordeaux-deep);
+    font-size:26px;
+    font-weight:500;
+  }
+  .confirm p{color:var(--ink-soft);font-size:15px;max-width:420px;margin:12px auto 0;}
+  .confirm .mailfallback{
+    margin-top:22px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .confirm .mailfallback a{color:var(--bordeaux);font-weight:600;}
+
+  form.hide{display:none;}
+
+  @media (max-width:480px){
+    .row2{flex-direction:column;}
+    .facts{gap:14px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 14 C8 26, 14 34, 24 34 C34 34, 40 26, 40 14" stroke="#6E2438" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M15 14 C15 22, 19 28, 24 28 C29 28, 33 22, 33 14" stroke="#B79ACB" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="24" cy="12" r="2.6" fill="#6E2438"/>
+  </svg>
+
+  <p class="eyebrow">Unique &amp; Unies</p>
+  <h1>Un mini-coaching complet,<br><em>offert.</em></h1>
+  <p class="intro">Questionnaire préparatoire, 2h en tête-à-tête, une semaine de suivi WhatsApp — le format que je lance, à tester gratuitement, en échange de ton honnêteté avant, pendant et après.</p>
+
+  <div class="facts">
+    <div class="fact"><strong>3</strong><span>places offertes</span></div>
+    <div class="fact"><strong>24h</strong><span>pour la sélection</span></div>
+    <div class="fact"><strong>100%</strong><span>reçoivent un cadeau</span></div>
+  </div>
+
+  <form id="candForm">
+
+    <div class="row2">
+      <div class="field">
+        <label for="prenom">Ton prénom</label>
+        <input type="text" id="prenom" required>
+      </div>
+      <div class="field">
+        <label for="age">Ton âge</label>
+        <input type="number" id="age" min="16" max="99" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="email">Ton email</label>
+      <input type="email" id="email" required>
+      <span class="hint">Pour te recontacter — et t'envoyer ton code de réduction sur l'ebook, que tu sois sélectionnée ou non.</span>
+    </div>
+
+    <div class="field">
+      <label for="probleme">Ton plus gros problème de style aujourd'hui</label>
+      <textarea id="probleme" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="vie">Ta situation de vie en ce moment, en deux lignes</label>
+      <textarea id="vie" required></textarea>
+      <span class="hint">Ce que tu traverses ou as traversé — ce qui a changé.</span>
+    </div>
+
+    <div class="field">
+      <label for="teste">Ce que tu as déjà essayé qui n'a pas fonctionné</label>
+      <textarea id="teste" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="reve">Ce dont tu rêves, si le déclic se faisait</label>
+      <textarea id="reve" required></textarea>
+    </div>
+
+    <div class="field">
+      <label>À quel point tu te sens bien dans tes vêtements aujourd'hui ?</label>
+      <fieldset class="scale" id="scale">
+        <label>1<input type="radio" name="scale" value="1"></label>
+        <label>2<input type="radio" name="scale" value="2"></label>
+        <label>3<input type="radio" name="scale" value="3"></label>
+        <label>4<input type="radio" name="scale" value="4"></label>
+        <label>5<input type="radio" name="scale" value="5"></label>
+        <label>6<input type="radio" name="scale" value="6"></label>
+        <label>7<input type="radio" name="scale" value="7"></label>
+        <label>8<input type="radio" name="scale" value="8"></label>
+        <label>9<input type="radio" name="scale" value="9"></label>
+        <label>10<input type="radio" name="scale" value="10"></label>
+      </fieldset>
+      <div class="scale-labels"><span>Pas du tout</span><span>Complètement</span></div>
+    </div>
+
+    <div class="field">
+      <label for="modalite">Tu es plutôt proche d'Angers, ou à distance ?</label>
+      <select id="modalite" required>
+        <option value="">Choisir…</option>
+        <option value="Presentiel">Je peux me déplacer près d'Angers</option>
+        <option value="Visio">Ce sera en visio pour moi</option>
+      </select>
+    </div>
+
+    <div class="divider"><span>presque fini</span></div>
+
+    <div class="consent">
+      <input type="checkbox" id="consent1" required>
+      <label for="consent1">J'ai compris qu'il s'agit d'un test avec sélection sous 24h, et que je ne serai peut-être pas retenue. <span class="req">*</span></label>
+    </div>
+
+    <div class="consent">
+      <input type="checkbox" id="consent2">
+      <label for="consent2">J'accepte que mes réponses ci-dessus puissent être citées, de façon anonyme, pour présenter ce mini-coaching (rien concernant mon expérience personnelle ne sera partagé sans mon accord explicite).</label>
+    </div>
+
+    <button type="submit" class="submit">Envoyer ma candidature</button>
+    <p class="footnote">Ça ouvrira ton application mail, déjà pré-remplie. Il te suffira d'appuyer sur envoyer.</p>
+  </form>
+
+  <div class="confirm" id="confirmBox">
+    <h2>Merci !</h2>
+    <p>Ta candidature est prête à partir depuis ta messagerie. Je reviens vers toutes les candidates sous 24h — sélectionnée ou non, ton code de réduction sur l'ebook arrive par email.</p>
+    <div class="mailfallback">Rien ne s'est ouvert ? Écris-moi directement à <a href="mailto:mathilde@uniqueetunies.fr">mathilde@uniqueetunies.fr</a></div>
+  </div>
+
+</div>
+
+<script>
+  const DEST_EMAIL = "mathilde@uniqueetunies.fr";
+
+  document.getElementById('candForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const val = id => (document.getElementById(id).value || "").trim();
+    const scaleEl = document.querySelector('input[name="scale"]:checked');
+    const scale = scaleEl ? scaleEl.value : "(non renseigné)";
+
+    const prenom = val('prenom');
+    const consent2 = document.getElementById('consent2').checked ? "Oui" : "Non";
+
+    let body = "";
+    body += "Prénom : " + prenom + "\n";
+    body += "Âge : " + val('age') + "\n";
+    body += "Email : " + val('email') + "\n\n";
+    body += "Plus gros problème de style :\n" + val('probleme') + "\n\n";
+    body += "Situation de vie :\n" + val('vie') + "\n\n";
+    body += "Déjà essayé (sans succès) :\n" + val('teste') + "\n\n";
+    body += "Ce dont elle rêve :\n" + val('reve') + "\n\n";
+    body += "Confort actuel dans ses vêtements (1-10) : " + scale + "\n";
+    body += "Modalité : " + val('modalite') + "\n\n";
+    body += "Accepte que ses réponses soient citées anonymement : " + consent2 + "\n";
+
+    const subject = "Candidature mini-coaching test – " + prenom;
+    const mailto = "mailto:" + encodeURIComponent(DEST_EMAIL) +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+
+    window.location.href = mailto;
+
+    document.getElementById('candForm').classList.add('hide');
+    document.getElementById('confirmBox').classList.add('show');
+  });
+</script>
+</body>
+</html>
