@@ -366,7 +366,7 @@
     </div>
 
     <button type="submit" class="submit">Envoyer ma candidature</button>
-    <p class="footnote">Ça ouvrira ton application mail, déjà pré-remplie. Il te suffira d'appuyer sur envoyer.</p>
+    <p class="footnote">Ta candidature m'arrive directement, en toute discrétion.</p>
   </form>
 
   <div class="confirm" id="confirmBox">
@@ -378,6 +378,8 @@
 </div>
 
 <script>
+  // ⚠️ Mathilde : colle ici l'URL de ton Google Apps Script une fois déployée (étape 6 du guide).
+  const GOOGLE_SCRIPT_URL = "COLLE_ICI_TON_URL_APPS_SCRIPT";
   const DEST_EMAIL = "mathilde@uniqueetunies.fr";
 
   document.getElementById('candForm').addEventListener('submit', function(e){
@@ -386,32 +388,62 @@
     const val = id => (document.getElementById(id).value || "").trim();
     const scaleEl = document.querySelector('input[name="scale"]:checked');
     const scale = scaleEl ? scaleEl.value : "(non renseigné)";
-
     const prenom = val('prenom');
-    const consent2 = document.getElementById('consent2').checked ? "Oui" : "Non";
 
+    const data = {
+      prenom: prenom,
+      age: val('age'),
+      email: val('email'),
+      probleme: val('probleme'),
+      vie: val('vie'),
+      teste: val('teste'),
+      reve: val('reve'),
+      scale: scale,
+      modalite: val('modalite'),
+      consent2: document.getElementById('consent2').checked ? "Oui" : "Non"
+    };
+
+    function showConfirm(){
+      document.getElementById('candForm').classList.add('hide');
+      document.getElementById('confirmBox').classList.add('show');
+    }
+
+    if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf("COLLE_ICI") === -1) {
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type": "text/plain"},
+        body: JSON.stringify(data)
+      }).then(showConfirm).catch(function(){
+        // en cas de souci réseau, on repasse par mail pour ne rien perdre
+        sendByMail(data, prenom);
+        showConfirm();
+      });
+    } else {
+      // pas encore branché sur Google Sheets : on passe par mail
+      sendByMail(data, prenom);
+      showConfirm();
+    }
+  });
+
+  function sendByMail(data, prenom){
     let body = "";
-    body += "Prénom : " + prenom + "\n";
-    body += "Âge : " + val('age') + "\n";
-    body += "Email : " + val('email') + "\n\n";
-    body += "Plus gros problème de style :\n" + val('probleme') + "\n\n";
-    body += "Situation de vie :\n" + val('vie') + "\n\n";
-    body += "Déjà essayé (sans succès) :\n" + val('teste') + "\n\n";
-    body += "Ce dont elle rêve :\n" + val('reve') + "\n\n";
-    body += "Confort actuel dans ses vêtements (1-10) : " + scale + "\n";
-    body += "Modalité : " + val('modalite') + "\n\n";
-    body += "Accepte que ses réponses soient citées anonymement : " + consent2 + "\n";
+    body += "Prénom : " + data.prenom + "\n";
+    body += "Âge : " + data.age + "\n";
+    body += "Email : " + data.email + "\n\n";
+    body += "Plus gros problème de style :\n" + data.probleme + "\n\n";
+    body += "Situation de vie :\n" + data.vie + "\n\n";
+    body += "Déjà essayé (sans succès) :\n" + data.teste + "\n\n";
+    body += "Ce dont elle rêve :\n" + data.reve + "\n\n";
+    body += "Confort actuel dans ses vêtements (1-10) : " + data.scale + "\n";
+    body += "Modalité : " + data.modalite + "\n\n";
+    body += "Accepte que ses réponses soient citées anonymement : " + data.consent2 + "\n";
 
     const subject = "Candidature mini-coaching test – " + prenom;
-    const mailto = "mailto:" + encodeURIComponent(DEST_EMAIL) +
+    window.location.href = "mailto:" + encodeURIComponent(DEST_EMAIL) +
       "?subject=" + encodeURIComponent(subject) +
       "&body=" + encodeURIComponent(body);
-
-    window.location.href = mailto;
-
-    document.getElementById('candForm').classList.add('hide');
-    document.getElementById('confirmBox').classList.add('show');
-  });
+  }
 </script>
 </body>
 </html>
